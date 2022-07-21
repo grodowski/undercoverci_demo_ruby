@@ -30,5 +30,10 @@ jobs:
       run: |
         ruby -e "$(curl -s https://undercover-ci.com/uploader.rb)" -- \
           --repo $GITHUB_REPOSITORY \
-          --commit $GITHUB_SHA \
+          --commit ${{ github.event.pull_request.head.sha }} \
           --lcov coverage/lcov/undercoverci_demo_ruby.lcov
+
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1
+      with:
+        limit-access-to-actor: true
